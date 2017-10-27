@@ -15,7 +15,7 @@
  * @wordpress-plugin
  * Plugin Name:       ZWP Modal
  * Plugin URI:        https://github.com/rardoz/zwp-modal.git
- * Description:       This is a short description of what the plugin does. It's displayed in the WordPress admin area.
+ * Description:       A pop-up modal plugin for wordpress.
  * Version:           1.0.0
  * Author:            Zardoz Creative Studio 
  * Author URI:        http://zardozcs.com
