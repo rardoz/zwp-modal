@@ -51,7 +51,7 @@ class Zwp_Modal_Public {
 
 		$this->plugin_name = $plugin_name;
 		$this->version = $version;
-
+		$this->zwp_modal_options = get_option($this->plugin_name);
 	}
 
 	/**
@@ -98,6 +98,10 @@ class Zwp_Modal_Public {
 
 		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/zwp-modal-public.js', array( 'jquery' ), $this->version, false );
 
+	}
+
+	public function show_modal(){
+		include_once( 'partials/zwp-modal-public-display.php' );
 	}
 
 }
