@@ -112,6 +112,10 @@ class Zwp_Modal_Admin {
 	}
 	
 	public function display_plugin_setup_page() {
+			$this->pages = get_pages();
+			$this->posts = get_posts( ['posts_per_page' => 1000]); 
+			$this->options = get_option($this->plugin_name);
+			$this->current_page = null;
 			include_once( 'partials/zwp-modal-admin-display.php' );
 	}
 
@@ -122,7 +126,7 @@ class Zwp_Modal_Admin {
 	public function validate($input) {
 		$valid = array();
 		foreach($input['pages'] as $key => $value) {
-			$valid[$key] =  filter_var($value, FILTER_SANITIZE_STRING);
+			$valid[$key] =  $value;
 		}
 		return $valid;
 	}

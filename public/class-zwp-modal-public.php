@@ -58,9 +58,9 @@ class Zwp_Modal_Public {
 		$page_object = get_queried_object();
 		$this->page_id = get_queried_object_id();
 		$this->page_name = $page_object->post_name;
-		if($this->zwp_modal_options[$this->page_id] && !$this->get_cookie()) {
-			$this->set_cookie(1); //todo add settings per modal
-			$this->post = $post = get_post( $this->zwp_modal_options[$this->page_id] );
+		if($this->zwp_modal_options[$this->page_id] && $this->zwp_modal_options[$this->page_id]['post_id'] && !$this->get_cookie()) {
+			$this->set_cookie($this->zwp_modal_options[$this->page_id]['cookie_time']);
+			$this->post = $post = get_post( $this->zwp_modal_options[$this->page_id]['post_id'] );
 			include_once( 'partials/zwp-modal-public-display.php' );
 		}
 	}
@@ -68,7 +68,7 @@ class Zwp_Modal_Public {
 	protected function set_cookie($days = -1){
 		setcookie(
 			$this->plugin_name.'-'.$this->page_name,
-			$this->zwp_modal_options[$this->page_id],
+			$this->zwp_modal_options[$this->page_id]['post_id'],
 			time() +  (86400 * $days) 
 		);
 	}
@@ -77,6 +77,6 @@ class Zwp_Modal_Public {
 		$cookie = filter_var(
 			$_COOKIE[$this->plugin_name.'-'.$this->page_name]
 		);
-		return $cookie && $cookie == $this->zwp_modal_options[$this->page_id];
+		return $cookie && $cookie == $this->zwp_modal_options[$this->page_id]['post_id'];
 	}
 }

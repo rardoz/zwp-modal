@@ -10,33 +10,34 @@
    * @package    Zwp_Modal
    * @subpackage Zwp_Modal/admin/partials
    */
-  $pages = get_pages(); 
-  $posts = get_posts( ['posts_per_page' => 1000]); 
-  $options = get_option($this->plugin_name);
 ?>
 
 <!-- This file should primarily consist of HTML with a little bit of PHP. -->
 <h2><?php esc_attr_e( 'ZWP Modal Settings', 'WpAdminStyle' ); ?></h2>
 <form method="post" name="zwp_modal_options" action="options.php">
-  <?php foreach($pages as $page): ?>
+  <?php foreach($this->pages as $this->current_page): ?>
+    <?php
+      $options = $this->options[$this->current_page->ID] ?: [];
+    ?>
     <fieldset>
-      <legend class="screen-reader-text"><span>Clean WordPress head section</span></legend>
-      <label for="<?= $this->plugin_name ?>-<?= $page->ID ?>">
-        <a href="<?= get_page_link( $page->ID ) ?>" target="_blank"><?= $page->post_title ?></a>
+      <label for="<?= $this->plugin_name ?>-<?= $this->current_page->ID ?>-select">
+        <a href="<?= get_page_link( $this->current_page->ID ) ?>" target="_blank"><?= $this->current_page->post_title ?></a>
       </label>
       <br />
       <select
-        id="<?= $this->plugin_name ?>-<?= $page->ID ?>"
-        name="<?= $this->plugin_name ?>[pages][<?= $page->ID ?>]"
+        id="<?= $this->plugin_name ?>-<?= $this->current_page->ID ?>-select"
+        name="<?= $this->plugin_name ?>[pages][<?= $this->current_page->ID ?>][post_id]"
       >
         <option value="">Select post</option>
-        <?php foreach($posts as $post): ?>
-            <option <?php if($options[$page->ID] == $post->ID) { echo 'selected'; }?> value="<?= $post->ID ?>">
+        <?php foreach($this->posts as $post): ?>
+            <option <?php if($options['post_id'] == $post->ID) { echo 'selected'; }?> value="<?= $post->ID ?>">
               <?= $post->post_title ?>
             </option>
         <?php endforeach?>
       </select>
     </fieldset>
+    
+    <? include('zwp-modal-settings.php') ?>
     <hr />
   <?php endforeach ?>
 
