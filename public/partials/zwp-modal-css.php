@@ -19,8 +19,7 @@
   .<?= $this->plugin_name ?>-content {
     max-width: 600px;
     width: calc(100vw - 60px);
-    max-height: 600px;
-    height: calc(100vh - 120px);
+    max-height: calc(100vh - 120px);
     padding-bottom: 30px;
     background: #fff;
     border-radius: 6px;
