@@ -54,54 +54,10 @@ class Zwp_Modal_Public {
 		$this->zwp_modal_options = get_option($this->plugin_name);
 	}
 
-	/**
-	 * Register the stylesheets for the public-facing side of the site.
-	 *
-	 * @since    1.0.0
-	 */
-	public function enqueue_styles() {
-
-		/**
-		 * This function is provided for demonstration purposes only.
-		 *
-		 * An instance of this class should be passed to the run() function
-		 * defined in Zwp_Modal_Loader as all of the hooks are defined
-		 * in that particular class.
-		 *
-		 * The Zwp_Modal_Loader will then create the relationship
-		 * between the defined hooks and the functions defined in this
-		 * class.
-		 */
-
-		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/zwp-modal-public.css', array(), $this->version, 'all' );
-
-	}
-
-	/**
-	 * Register the JavaScript for the public-facing side of the site.
-	 *
-	 * @since    1.0.0
-	 */
-	public function enqueue_scripts() {
-
-		/**
-		 * This function is provided for demonstration purposes only.
-		 *
-		 * An instance of this class should be passed to the run() function
-		 * defined in Zwp_Modal_Loader as all of the hooks are defined
-		 * in that particular class.
-		 *
-		 * The Zwp_Modal_Loader will then create the relationship
-		 * between the defined hooks and the functions defined in this
-		 * class.
-		 */
-
-		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/zwp-modal-public.js', array( 'jquery' ), $this->version, false );
-
-	}
-
 	public function show_modal(){
+		$page_object = get_queried_object();
+		$this->page_id = get_queried_object_id();
+		$this->post_name = $page_object->post_name;
 		include_once( 'partials/zwp-modal-public-display.php' );
 	}
-
 }
