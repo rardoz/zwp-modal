@@ -3,7 +3,7 @@
     var ZWPModal = function(){
       var
         self = this,
-        modal = document.getElementById('<?= $this->plugin_name ?>-<?= $this->post_name ?>'),
+        modal = document.getElementById('<?= $this->plugin_name ?>-<?= $this->page_name ?>'),
         content = modal.getElementsByClassName('<?= $this->plugin_name ?>-content')[0],
         container = modal.getElementsByClassName('<?= $this->plugin_name ?>-container')[0],
         closeBtn = modal.getElementsByClassName('<?= $this->plugin_name ?>-close-button')[0],
