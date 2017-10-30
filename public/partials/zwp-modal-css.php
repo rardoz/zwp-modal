@@ -17,13 +17,13 @@
   }
 
   .<?= $this->plugin_name ?>-content {
-    max-width: 600px;
-    width: calc(100vw - 60px);
-    max-height: calc(100vh - 120px);
-    padding-bottom: 30px;
-    background: #fff;
-    border-radius: 6px;
-    box-shadow: 1px 1px 12px rgba(0,0,0,0.5);
+    max-width: <?= $this->options['max-width'] ?: '600px' ?>;
+    width: calc(100vw - <?= $this->options['vertical-space'] ?: '60px' ?>);
+    max-height: calc(100vh - <?= $this->options['vertical-space'] ?: '120px' ?>);
+    padding-bottom: <?= $this->options['padding'] ?: '30px' ?>;
+    background: <?= $this->options['background-style'] ?: '#fff' ?>;
+    border-radius: <?= $this->options['border-radius'] ?: '6px' ?>;
+    box-shadow: <?= $this->options['box-shadow-style'] ?: '1px 1px 12px rgba(0,0,0,0.5)' ?>;
     position: relative;
     display: flex;
     transition: transform 1s ease-in-out;
@@ -34,7 +34,7 @@
     overflow: auto;
     width: 100%;
     height: 100%;
-    padding: 0 30px;
+    padding: 0  <?= $this->options['padding'] ?: '30px' ?>;
   }
 
   .<?= $this->plugin_name ?>-close-button {
@@ -45,12 +45,13 @@
     height: 30px;
     width: 30px;
     padding: 3px;
-    transition: transform 1s ease-in-out, opacity 1s ease-in-out;
+    transition: opacity 0.5s ease-in-out;
+    display:  <?= $this->options['hide-close-button'] ? 'none' : 'block' ?>
   }
 
   .<?= $this->plugin_name ?>-close-button:focus {
     outline: none;
-    transform: rotate(360deg);
+    opacity: 0.6;
   }
 
   .<?= $this->plugin_name ?>-close-button:hover {

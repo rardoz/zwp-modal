@@ -60,7 +60,8 @@ class Zwp_Modal_Public {
 		$this->page_name = $page_object->post_name;
 		if($this->zwp_modal_options[$this->page_id] && $this->zwp_modal_options[$this->page_id]['post_id'] && !$this->get_cookie()) {
 			$this->set_cookie($this->zwp_modal_options[$this->page_id]['cookie_time']);
-			$this->post = $post = get_post( $this->zwp_modal_options[$this->page_id]['post_id'] );
+			$this->options = $this->zwp_modal_options[$this->page_id];
+			$this->post = $post = get_post( $this->options['post_id'] );
 			include_once( 'partials/zwp-modal-public-display.php' );
 		}
 	}
