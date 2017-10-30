@@ -112,9 +112,20 @@ class Zwp_Modal_Admin {
 	}
 	
 	public function display_plugin_setup_page() {
-			$this->pages = get_pages();
-			$this->posts = get_posts( ['posts_per_page' => 1000]); 
 			$this->options = get_option($this->plugin_name);
+			$page_ids = [];
+			$post_ids = [];
+			
+			foreach($this->options as $key => $option) {
+				if($option['post_id']) {
+					$page_ids[] = $key;
+					$post_ids[] = $option['post_id'];
+				}
+			}
+
+			$this->pages = count($page_ids) > 0 ? get_pages(['include' => $page_ids]) : [];
+			$this->posts = get_posts( ['include' => $post_ids]); 
+			
 			$this->current_page = null;
 			include_once( 'partials/zwp-modal-admin-display.php' );
 	}
@@ -129,5 +140,43 @@ class Zwp_Modal_Admin {
 			$valid[$key] =  $value;
 		}
 		return $valid;
+	}
+	protected function get_form($page) {
+		$this->current_page = $page;
+		ob_start();
+		include( 'partials/zwp-modal-settings.php' );
+		$contents = ob_get_contents();
+		ob_end_clean();
+		return $contents;
+	}
+	
+	public function ajax_listings() {
+		global $wpdb;
+		$this->options = get_option($this->plugin_name);
+		$titles = array();
+
+		$name = $wpdb->esc_like(stripslashes(strtolower($_POST['name']))); 
+		$type = $wpdb->esc_like($_POST['type']);
+
+		$sql = "select ID, post_title, post_type
+			from $wpdb->posts 
+			where post_type = '$type'
+			and (lower(concat(' ', post_title, ' ', ID, ' ')) like '% $name%')
+			limit 5
+		";
+
+		$sql = $wpdb->prepare($sql, $name);
+		$results = $wpdb->get_results($sql);
+
+		foreach($results as $r){
+			$titles[] = [
+				'title' => addslashes($r->post_title),
+				'id' => $r->ID,
+				'form' => json_encode($this->get_form($r))
+			];
+		}
+
+		echo json_encode($titles);
+		die();
 	}
 }

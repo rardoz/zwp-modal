@@ -158,6 +158,9 @@ class Zwp_Modal {
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
 		$this->loader->add_action('admin_init', $plugin_admin, 'options_update');
 
+		$this->loader->add_action('wp_ajax_nopriv_get_listing_names', $plugin_admin, 'ajax_listings');
+		$this->loader->add_action('wp_ajax_get_listing_names', $plugin_admin, 'ajax_listings');
+
 		// Add menu item
 		$this->loader->add_action( 'admin_menu', $plugin_admin, 'add_plugin_admin_menu' );
 
