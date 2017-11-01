@@ -22,5 +22,8 @@ A simple pop-up modal plugin for wordpress. Fully customizable per page. Render 
 
 ## Changelog
 
+### 1.0.1
+* Add readme for wordpress
+
 ### 1.0
 * The one that started them all.
