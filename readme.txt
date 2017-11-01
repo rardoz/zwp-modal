@@ -22,8 +22,8 @@ A simple pop-up modal plugin for wordpress. Fully customizable per page. Render 
 
 == Screenshots ==
 
-1. screenshot_1.png
-1. settings.png
+1. screenshot-1.png
+1. screenshot-2.png
 
 == Changelog ==
 

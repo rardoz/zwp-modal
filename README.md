@@ -15,9 +15,9 @@ A simple pop-up modal plugin for wordpress. Fully customizable per page. Render 
 
 ## Screenshots
 
-![alt text](/assets/screenshot_1.png "Default screenshot")
+![alt text](/assets/screenshot-1.png "Default screenshot")
 
-![alt text](/assets/settings.png "Default settings")
+![alt text](/assets/screenshot-2.png "Default settings")
 
 
 ## Changelog
